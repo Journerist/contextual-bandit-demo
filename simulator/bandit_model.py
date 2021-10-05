@@ -9,10 +9,6 @@ class BanditModel:
     def __init__(self, ads, contexts) -> None:
         self.vw = self.__create_bandit_model(ads)
         self.ads = ads
-
-        # initial seed for each ad
-
-        # initial seed - all policies start with the same small random selection of actions/rewards
         np.random.seed(1)
 
         # for all context combinations and targets, we will create some seed data to enable the internal model to explore all contexts and all ads
@@ -69,7 +65,6 @@ class BanditModel:
         return predict_str
 
 
-    # Let's try with https://github.com/david-cortes/contextualbandits
     def __create_bandit_model(self, ads):
         vw = pyvw.vw(f"--cb_explore_adf -q UA --quiet --first 2000")
         #vw = pyvw.vw(f"--cb_explore {str(len(ads))} --quiet --first 2000")
